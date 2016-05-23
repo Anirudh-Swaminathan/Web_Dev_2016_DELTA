@@ -1,14 +1,11 @@
 #This is for Delta Inductions Web-Dev 2016
- > One should have a copy of this Readme file in their branch.
-   Just mark the options that you've finished so far. I shall add more tasks
-   from various categories here. Just pick up one and solve it.
+ > Hello!!!
 
 ## Introduction
-I am Tushar Gautam, junior year, Production Engineering department, NIT Trichy.
-Read more at http://gtushar.co :smiley:
+I am Anirudh Swaminathan, first year, Chemical Engineering department, NIT Trichy. :smiley:
 
- > Note: You need to follow the exact format for Intro section. Obviously, change the contents.
-   Also copy the below sections too.
+
+ > This will be a section.
 
 ### Task 1
 
