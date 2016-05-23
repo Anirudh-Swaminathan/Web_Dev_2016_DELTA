@@ -1,4 +1,5 @@
 #This is for Delta Inductions Web-Dev 2016
+<!---
 [//]: > Hello!!!
 
 [//]:## Introduction
@@ -15,3 +16,4 @@
 [//]:######Difficulty: Super Easy
 [//]:- [x] Create a branch with name as `<username>/wip` in this repository.
 [//]:- [ ] Read about markdowns.
+-->
