@@ -13,5 +13,33 @@
 	left:500px;
 }
 #inputter{
-	
+	position:relative;
+	top:100px;
+	left:500px;
+}
+body{
+	background-image:url('images2.jpg');
+}
+.time
+{
+  left: 0px;
+  position:relative;
+  -webkit-animation:SlideDown 3s;
+  animation:SlideDown 3s;
+}
+@-webkit-keyframes SlideDown {
+  from {left:-100%;}
+  to {left:0px;}
+}
+@-moz-keyframes SlideDown {
+  from {left:-100%;}
+  to {left:0px;}
+}
+@-o-keyframes SlideDown {
+  from {left:-100%;}
+  to {left:0px;}
+}
+@keyframes SlideDown {
+  from {left:-100%;}
+  to {left:0px;}
 }
