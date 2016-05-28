@@ -1,3 +1,4 @@
+//set is whether the timer has been set(started) and run is the running status of the timer.
 var set = false;
 var run = false;
 //Accessing buttons
@@ -8,6 +9,7 @@ var rese = document.getElementById('reset');
 var ended = false;
 var toBe;
 
+//accessing the divs
 var day = document.getElementById('day');
 var hour = document.getElementById('hour');
 var minu = document.getElementById('minu');
@@ -120,6 +122,7 @@ start.onclick = function(){
 		document.getElementById('start').style.visibility = "hidden";
 	}
 };
+//event listener for pause button click
 pause.onclick = function(){
 	if(set && run){
 		run = false;
@@ -127,6 +130,7 @@ pause.onclick = function(){
 		document.getElementById('start').innerHTML = "Resume";
 	}
 };
+//event listener for reset button click
 rese.onclick = function(){
 	if(set){
 		set = false;
