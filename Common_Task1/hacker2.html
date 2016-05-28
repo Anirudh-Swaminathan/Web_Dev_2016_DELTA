@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>TIMER(HACKER)</title>
+	<link rel="stylesheet" href="timer.css" type="text/css">
+	</link>
+</head>
+<body>
+	<h3 id = "timLeft">Time Left for </h3>
+	<!-- Positioning the divs in the center, each 
+	containing day,hour,minute, and seconds left-->
+	<div id="container">
+		<div class="time" id="day">
+		</div>
+		<div class="time" id="hour">
+		</div>
+		<div class="time" id="minu">
+		</div>
+		<div class="time" id="seco">
+		</div>
+	</div>
+	<div id="inputter">
+		<input type="number" id="year" min = 1970 placeholder="year"></input>
+		<input type="number" id="month" min = 1 max=12 placeholder="month" ></input>
+		<input type="number" id="date" min=1 max=31 placeholder="date" ></input>
+		<br/>
+		<input type="number" id="hourI" min=0 max=23 placeholder="Hours"></input>
+		<input type="number" id="minute" min=0 max=59 placeholder="minutes"></input>
+		<input type="number" id="secondI" min=0 max=59 placeholder="seconds"></input>
+		
+		<br/>
+		
+		<button id="start">Start</button>
+		<button id="pause">Pause</button>
+		<button id="reset">Reset</button>
+	</div>
+	
+	<script type='text/javascript' src='hacker2.js'>
+	</script>
+</body>
+</html>
