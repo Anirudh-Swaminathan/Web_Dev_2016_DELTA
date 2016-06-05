@@ -7,8 +7,8 @@ var randPos = 0;
 
 function startGame(){
 	Anigame.start();
-	dinosaur = new component(30,30,"red",10,120);
-	cactus = new component(10,30,"green",300,120);
+	dinosaur = new component(100,50,"dino.png",10,100,"image");
+	//cactus = new component(10,30,"green",300,120);
 	//alert('In startGame()');
 }
 
@@ -20,6 +20,8 @@ var Anigame = {
 		this.context = this.canvas.getContext('2d');
 		//document.body.insertBefore(this.canvas,document.body.childNodes[0]);
 		document.body.appendChild(this.canvas);
+		this.context.fillStyle = "#f2f2f2";
+		this.context.fillRect(0,0,480,270);
 		this.frameNo = 0;
 		//FPS is 50
 		this.interval = setInterval(updateArena,20);
@@ -45,23 +47,32 @@ var Anigame = {
 	}
 }
 
-function component(width,height,color,x,y){
+function component(width,height,color,x,y,type){
+	this.type = type;
+	if(type == "image"){
+		this.imag = new Image();
+		this.imag.src = color;
+	}
 	this.width = width;
 	this.height = height;
 	this.x = x;
 	this.y = y;
 	this.update = function(){
 		ctx = Anigame.context;
-		ctx.fillStyle = color;
-		ctx.fillRect(this.x,this.y,this.width,this.height);
+		if(type == "image"){
+			ctx.drawImage(this.imag,this.x,this.y,this.width,this.height);
+		} else{
+			ctx.fillStyle = color;
+			ctx.fillRect(this.x,this.y,this.width,this.height);
+		}
 	}
 	this.newPos = function(){
 		this.x+=this.speedX;
 		this.y+=this.speedY;
 	}
 	this.crashWith = function(cactii) {
-        var dinol = this.x;
-        var dinor = this.x + (this.width);
+        var dinol = this.x + 35;
+        var dinor = this.x + (this.width)-35;
         //var dinotop = this.y;
         var dinobot = this.y + (this.height);
         var cactl = cactii.x;
@@ -85,11 +96,15 @@ function updateArena(){
 	}
 	Anigame.clear();
 	
+	Anigame.context.fillStyle = "#f7f7f7";//#f0f0f0 #f8f8f8
+	Anigame.context.fillRect(0,0,480,270);
+	
+	
 	Anigame.frameNo+=1;
 	if(Anigame.frameNo == 150+randPos){
 		x = Anigame.canvas.width;
-		y = Anigame.canvas.height - 144;
-		cactii.push(new component(10,24,"green",x,y));
+		y = Anigame.canvas.height - 148;
+		cactii.push(new component(10,24,"green",x,y,"rect"));
 		randPos = Math.floor(Math.random()*50);
 		Anigame.frameNo = 0;
 	}
@@ -121,9 +136,14 @@ function updateArena(){
 	}
 	//cactus.x+=-1;
 	//cactus.update();
+	dinosaur.update();
+	Anigame.context.beginPath();
+	Anigame.context.moveTo(0,146);
+	Anigame.context.lineTo(480,146);
+	Anigame.context.stroke();
 	for(var i=0; i<cactii.length; ++i){
 		cactii[i].x+=-1;
 		cactii[i].update();
 	}
-	dinosaur.update();
+	
 }
