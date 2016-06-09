@@ -3,3 +3,13 @@ canvas{
 	top:12em;
 	left:30%;
 }
+#scores{
+	position:relative;
+	line-height:25px;
+	width:150px;
+	text-align:center;
+	vertical-align:middle;
+	z-index:3;
+	top:15em;
+	left:60%;
+}

@@ -1,16 +1,29 @@
 //alert('Hi');
-
+//All variables are declared here.
 var dinosaur;
 var jump = 0;
 var cactii = [];
 var randPos = 0;
 var bg,bg1;
+var score = document.getElementById("scores");
+var tot=0;
+var hiscore = 0;
+var msg = "SCORE: ";
+
+function getHi(){
+	if(sessionStorage.getItem("hiScore")!==null){
+		hiscore = parseInt(sessionStorage.getItem("hiScore"));
+		msg = "HI: "+hiscore+"&nbsp;&nbsp;SCORE: ";
+	}
+}
 
 function startGame(){
 	Anigame.start();
+	getHi();
 	dinosaur = new component(100,50,"dino.png",55,172,"image");
 	bg = new component(600,270,"dino_bg.png",0,0,"background");
 	bg1 = new component(600,270,"dino_bg.png",600,0,"background");
+	//score = new component("20px ","Arial","black",280,40,"text");
 	//cactus = new component(10,30,"green",300,120);
 	//alert('In startGame()');
 }
@@ -47,12 +60,16 @@ var Anigame = {
 	},
 	stop: function(){
 		clearInterval(this.interval);
+		if(Math.floor(tot/15) > hiscore) hiscore = Math.floor(tot/15);
+		msg = "HI: "+hiscore+"&nbsp;&nbsp;SCORE: ";
+		score.innerHTML = msg+Math.floor(tot/15);
+		sessionStorage.setItem("hiScore",hiscore);
 	}
 }
 
 function component(width,height,color,x,y,type){
 	this.type = type;
-	if(type == "image" || type == "background"){
+	if(type == "image" || type=="background"){
 		this.imag = new Image();
 		this.imag.src = color;
 	}
@@ -60,15 +77,29 @@ function component(width,height,color,x,y,type){
 	this.height = height;
 	this.x = x;
 	this.y = y;
+	
 	this.update = function(){
 		ctx = Anigame.context;
 		if(type == "image" || type == "background"){
 			ctx.drawImage(this.imag,this.x,this.y,this.width,this.height);
-		} else{
+		}
+		
+		else{
 			ctx.fillStyle = color;
 			ctx.fillRect(this.x,this.y,this.width,this.height);
 		}
 		/*
+			if(type == "text"){
+			ctx.font = this.width+this.height;
+			ctx.fillStyle = color;
+			ctx.fillText(this.textH,this.x,this.y);
+		}	
+		this.textH = "SCORE: ";
+	if(type == "text"){
+			ctx.font = this.width+this.height;
+			ctx.fillStyle = color;
+			ctx.fillText(this.textH,this.x,this.y);
+	}
 		
 		*/
 	}
@@ -85,7 +116,7 @@ function component(width,height,color,x,y,type){
         var dinol = this.x + 35;
         var dinor = this.x + (this.width)-35;
         //var dinotop = this.y;
-        var dinobot = this.y + (this.height);
+        var dinobot = this.y + (this.height) - 5;
         var cactl = cactii.x;
         var cactr = cactii.x + (cactii.width);
         var cacttop = cactii.y;
@@ -112,6 +143,7 @@ function updateArena(){
 	
 	
 	Anigame.frameNo+=1;
+	tot++;
 	if(Anigame.frameNo == 150+randPos){
 		x = Anigame.canvas.width;
 		y = Anigame.canvas.height - 78;
@@ -163,9 +195,12 @@ function updateArena(){
 	Anigame.context.moveTo(55,215.5);
 	Anigame.context.lineTo(155,215.5);
 	Anigame.context.stroke();
+	
 	for(var i=0; i<cactii.length; ++i){
 		cactii[i].x+=-1;
 		cactii[i].update();
 	}
+	
+	score.innerHTML = msg+Math.floor(tot/15);
 	
 }
