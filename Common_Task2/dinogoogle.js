@@ -14,6 +14,8 @@ var msg = "SCORE: ";
 var jumpSound;
 var hitSound;
 var highSound;
+//Sprites
+var fra = 0;
 
 function getHi(){
 	if(sessionStorage.getItem("hiScore")!==null){
@@ -97,20 +99,6 @@ function component(width,height,color,x,y,type){
 			ctx.fillStyle = color;
 			ctx.fillRect(this.x,this.y,this.width,this.height);
 		}
-		/*
-			if(type == "text"){
-			ctx.font = this.width+this.height;
-			ctx.fillStyle = color;
-			ctx.fillText(this.textH,this.x,this.y);
-		}	
-		this.textH = "SCORE: ";
-	if(type == "text"){
-			ctx.font = this.width+this.height;
-			ctx.fillStyle = color;
-			ctx.fillText(this.textH,this.x,this.y);
-	}
-		
-		*/
 	}
 	this.newPos = function(){
 		this.x+=this.speedX;
@@ -136,6 +124,11 @@ function component(width,height,color,x,y,type){
         }
         return crash;
     }
+	this.changeSrc = function(srcIt){
+		if(this.type === "image"){
+			this.imag.src = srcIt;
+		}
+	}
 }
 function updateArena(){
 	var x,y;
@@ -203,6 +196,20 @@ function updateArena(){
 	bg1.update();
 	Anigame.context.fillStyle = "#f7f7f7";//#f0f0f0 #f8f8f8
 	Anigame.context.fillRect(55,172,100,50);
+	
+	//Sprite coding
+	
+	if(fra<10){
+		dinosaur.changeSrc("dino1.png");
+		fra++;
+	}
+	else if(fra<20){
+		dinosaur.changeSrc("dino2.png");
+		fra++;
+	}
+	else fra = 0;
+	
+	
 	dinosaur.update();
 	Anigame.context.beginPath();
 	Anigame.context.moveTo(55,215.5);
