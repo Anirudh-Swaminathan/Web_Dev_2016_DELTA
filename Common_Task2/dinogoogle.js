@@ -27,7 +27,7 @@ function getHi(){
 function startGame(){
 	Anigame.start();
 	getHi();
-	dinosaur = new component(100,50,"dino.png",55,172,"image");
+	dinosaur = new component(100,75,"dino.png",55,162,"image");
 	bg = new component(600,270,"dino_bg.png",0,0,"background");
 	bg1 = new component(600,270,"dino_bg.png",600,0,"background");
 	
@@ -110,10 +110,11 @@ function component(width,height,color,x,y,type){
 		}
 	}
 	this.crashWith = function(cactii) {
-        var dinol = this.x + 35;
-        var dinor = this.x + (this.width)-35;
+        var dinol = this.x + 32;
+        var dinor = this.x + (this.width)-20;
+		if(this.imag.src == "dino_jump.png") dinor = this.x+ this.width - 35;
         //var dinotop = this.y;
-        var dinobot = this.y + (this.height) - 5;
+        var dinobot = this.y + (this.height) - 18;
         var cactl = cactii.x;
         var cactr = cactii.x + (cactii.width);
         var cacttop = cactii.y;
@@ -162,17 +163,19 @@ function updateArena(){
 	//dinosaur.speedX = 0;
 	//dinosaur.speedY = -1;
 		if(jump == 0) {
-			jump = 100;
+			jump = 120;
+			dinosaur.changeSrc("dino_jump.png");
+			//dinosaur.changeSrc("dino.png");
 			jumpSound.play();
 		}
 	}
-	if(jump>65) {
+	if(jump>75) {
 		dinosaur.speedX = 0;
 		dinosaur.speedY = -2;
 		dinosaur.newPos();
 		jump--;
 	}
-	else if(jump>35){
+	else if(jump>45){
 		dinosaur.speedX = 0;
 		dinosaur.speedY = 0;
 		dinosaur.newPos();
@@ -198,24 +201,25 @@ function updateArena(){
 	Anigame.context.fillRect(55,172,100,50);
 	
 	//Sprite coding
-	
-	if(fra<10){
-		dinosaur.changeSrc("dino1.png");
-		fra++;
+	if(jump == 0){
+		if(fra<10){
+			dinosaur.changeSrc("dino_right.png");
+			fra++;
+		}
+		else if(fra<20){
+			dinosaur.changeSrc("dino_left.png");
+			fra++;
+		}
+		else fra = 0;
+		dinosaur.update();
 	}
-	else if(fra<20){
-		dinosaur.changeSrc("dino2.png");
-		fra++;
+	else{
+		dinosaur.update();
+		Anigame.context.beginPath();
+		Anigame.context.moveTo(55,215.5);
+		Anigame.context.lineTo(155,215.5);
+		Anigame.context.stroke();	
 	}
-	else fra = 0;
-	
-	
-	dinosaur.update();
-	Anigame.context.beginPath();
-	Anigame.context.moveTo(55,215.5);
-	Anigame.context.lineTo(155,215.5);
-	Anigame.context.stroke();
-	
 	for(var i=0; i<cactii.length; ++i){
 		cactii[i].x+=-1;
 		cactii[i].update();
