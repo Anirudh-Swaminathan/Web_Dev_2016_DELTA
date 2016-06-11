@@ -4,11 +4,13 @@ var dinosaur;
 var jump = 0;
 var cactii = [];
 var randPos = 0;
+var randBird = 70;
 var bg,bg1;
 var score = document.getElementById("scores");
 var tot=0;
 var hiscore = 0;
 var msg = "SCORE: ";
+var accel = 0,added = 0,fram = 125,fra1 = 75;
 
 //variables to add sound to the game
 var jumpSound;
@@ -83,6 +85,7 @@ function component(width,height,color,x,y,type){
 	if(type == "image" || type=="background"){
 		this.imag = new Image();
 		this.imag.src = color;
+		this.vir = 0;
 	}
 	this.width = width;
 	this.height = height;
@@ -104,21 +107,29 @@ function component(width,height,color,x,y,type){
 		this.x+=this.speedX;
 		this.y+=this.speedY;
 		if(this.type == "background"){
-			if(this.x == -(this.width)){
+			if(this.x <= -(this.width)){
 				this.x=this.width;
 			}
 		}
 	}
 	this.crashWith = function(cactii) {
-        var dinol = this.x + 32;
-        var dinor = this.x + (this.width)-20;
-		if(this.imag.src == "dino_jump.png") dinor = this.x+ this.width - 35;
+        var dinol = this.x + 35;
+        var dinor = this.x + (this.width)-23;
+		if(this.imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/dino_jump.png") {
+			dinor = this.x+ this.width - 35;
+			//alert('Jumping dino');
+		}
         //var dinotop = this.y;
         var dinobot = this.y + (this.height) - 18;
         var cactl = cactii.x;
-        var cactr = cactii.x + (cactii.width);
+        var cactr = cactii.x + (cactii.width)-5;
         var cacttop = cactii.y;
         //var otherbottom = otherobj.y + (otherobj.height);
+		
+		if(cactii.imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"){
+			cactr = cactii.x +cactii.width - 15;
+		}
+		
         var crash = true;
         if ((dinobot < cacttop) || (dinor < cactl) || (dinol > cactr)) {
             crash = false;
@@ -131,6 +142,9 @@ function component(width,height,color,x,y,type){
 		}
 	}
 }
+
+
+
 function updateArena(){
 	var x,y;
 	for(var i=0; i<cactii.length; ++i){
@@ -148,12 +162,31 @@ function updateArena(){
 	
 	Anigame.frameNo+=1;
 	tot++;
-	if(Anigame.frameNo == 150+randPos){
+	if(Anigame.frameNo >= fram+randPos){
 		x = Anigame.canvas.width;
-		y = Anigame.canvas.height - 78;
-		cactii.push(new component(10,24,"green",x,y,"rect"));
-		randPos = Math.floor(Math.random()*50);
+		y = Anigame.canvas.height - 84;
+		if(Math.floor(tot/15)>100 && Math.floor(tot/15)%randBird <= 10) {
+			y = Anigame.canvas.height - 80;
+			cactii.push(new component(50,24,"birdUp.png",x,y,"image"));
+			randBird = randBird + Math.floor(Math.random()*85);
+		}
+		else {
+			cactii.push(new component(15,34,"cactus1.png",x,y,"image"));
+			//alert('randBird is '+randBird+' score is '+Math.floor(tot/15)+'score % randBird is '+Math.floor(tot/15)%randBird);
+		}
+		randPos = Math.floor(Math.random()*fra1);
 		Anigame.frameNo = 0;
+	}
+	
+	if(Math.floor(tot/15)!=0 && Math.floor(tot/15)%75 === 0){
+		if(added ==0){
+			accel+=0.1;
+			fram -=7;
+			fra1-=5;
+			added = 1;
+		}
+	} else{
+		added = 0;
 	}
 	
 	dinosaur.speedX=0;
@@ -189,9 +222,9 @@ function updateArena(){
 	}
 	//cactus.x+=-1;
 	//cactus.update();
-	bg.speedX = -1;
+	bg.speedX = -1-accel;
 	bg.speedY = 0;
-	bg1.speedX = -1;
+	bg1.speedX = -1-accel;
 	bg1.speedY = 0;
 	bg.newPos();
 	bg.update();
@@ -220,8 +253,26 @@ function updateArena(){
 		Anigame.context.lineTo(155,215.5);
 		Anigame.context.stroke();	
 	}
+	
 	for(var i=0; i<cactii.length; ++i){
-		cactii[i].x+=-1;
+		cactii[i].x+=-1-accel;
+		if(cactii[i].vir<30){
+			if(cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"||
+			cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdDown.png"){
+				cactii[i].changeSrc("birdDown.png");
+				cactii[i].vir++;
+				//alert('Changed source to dino.vir is '+cactii[i].vir);
+			}
+		}
+		else if(cactii[i].vir<60){
+			if(cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdDown.png"||
+			"file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"){
+				cactii[i].changeSrc("birdUp.png");
+				cactii[i].vir++;
+				//alert('Changed source to Screenshot.vir is '+cactii[i].vir);
+			}		
+		}
+		else cactii[i].vir = 0;
 		cactii[i].update();
 	}
 	
