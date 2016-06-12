@@ -273,16 +273,16 @@ function updateArena(){
 		for(var i=0; i<cactii.length; ++i){
 			cactii[i].x+=-1-accel;
 			if(cactii[i].vir<30){
-				if(cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"||
-				cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdDown.png"){
+				if(cactii[i].imag.src === "birdUp.png"||
+				cactii[i].imag.src === "birdDown.png"){
 					cactii[i].changeSrc("birdDown.png");
 					cactii[i].vir++;
-				//alert('Changed source to dino.vir is '+cactii[i].vir);
+				alert('Changed source to dino.vir is '+cactii[i].vir);
 				}
 			}
 			else if(cactii[i].vir<60){
-				if(cactii[i].imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdDown.png"||
-				"file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"){
+				if(cactii[i].imag.src === "birdDown.png"||
+				"birdUp.png"){
 					cactii[i].changeSrc("birdUp.png");
 					cactii[i].vir++;
 				//alert('Changed source to Screenshot.vir is '+cactii[i].vir);
