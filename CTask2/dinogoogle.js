@@ -274,8 +274,8 @@ function updateArena(){
 			cactii[i].x+=-1-accel;
 			if(cactii[i].vir<30){
 				//alert(''+cactii[i].imag.src);
-				if(cactii[i].imag.src === url("birdUp.png")||
-				cactii[i].imag.src === url("birdDown.png")){
+				if(cactii[i].imag.src === "birdUp.png"||
+				cactii[i].imag.src === "birdDown.png"){
 					cactii[i].changeSrc("birdDown.png");
 					cactii[i].vir++;
 				//alert('Changed source to dino.vir is '+cactii[i].vir);
