@@ -1,7 +1,7 @@
 canvas{
 	position:relative;
-	top:12em;
-	left:30%;
+	top:6em;
+	left:26%;
 }
 #scores{
 	position:relative;
@@ -10,6 +10,19 @@ canvas{
 	text-align:center;
 	vertical-align:middle;
 	z-index:3;
-	top:15em;
-	left:60%;
+	top:12.5em;
+	left:55%;
+}
+#creator{
+	position:relative;
+	line-height:25px;
+	vertical-align:middle;
+	top:35em;
+}
+a{
+	text-decoration:none;
+	color:black;
+}
+a:hover{
+	color:#36f1ed;
 }
