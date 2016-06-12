@@ -16,8 +16,14 @@ var accel = 0,added = 0,fram = 125,fra1 = 75;
 var jumpSound;
 var hitSound;
 var highSound;
+
 //Sprites
 var fra = 0;
+
+//Variables for start and pause
+var start = false;
+var paused =false;
+
 
 function getHi(){
 	if(sessionStorage.getItem("hiScore")!==null){
@@ -36,9 +42,6 @@ function startGame(){
 	jumpSound = new playSound("dino_jump.mp3");
 	hitSound = new playSound("dino_hit.mp3");
 	highSound = new playSound("dino_high.mp3");
-	//score = new component("20px ","Arial","black",280,40,"text");
-	//cactus = new component(10,30,"green",300,120);
-	//alert('In startGame()');
 }
 
 var Anigame = {
@@ -146,6 +149,7 @@ function component(width,height,color,x,y,type){
 
 
 function updateArena(){
+	if(!paused){
 	var x,y;
 	for(var i=0; i<cactii.length; ++i){
 		if(dinosaur.crashWith(cactii[i])){
@@ -279,6 +283,20 @@ function updateArena(){
 	score.innerHTML = msg+Math.floor(tot/15);
 	if(Math.floor(tot/15) == hiscore && Math.floor(tot/15)!==0) highSound.play();
 	if(Math.floor(tot/15)%100 == 0 && Math.floor(tot/15)!==0) highSound.play();
+	}
+	//Pause game
+	if(Anigame.key && Anigame.key == 80){
+		if(paused){
+			paused = false;
+			Anigame.key = false;
+			//alert('Resuming game');
+		}
+		else{
+			paused = true;
+			Anigame.key = false;
+			//alert('Pausing game');
+		}
+	}
 	
 }
 //Function to add sound
