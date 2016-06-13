@@ -1,7 +1,9 @@
+/* Position the canvas in the middle */
 canvas{
 	position:relative;
 	left:26%;
 }
+/* Position the scores at the top of the canvas */
 #scores{
 	position:relative;
 	line-height:25px;
@@ -12,12 +14,14 @@ canvas{
 	top:6.5em;
 	left:55%;
 }
+/* Center the developers name(Anirudh Swaminathan) */
 #creator{
 	position:relative;
 	line-height:25px;
 	vertical-align:middle;
 	top:28em;
 }
+/* The link's styling */
 a{
 	text-decoration:none;
 	color:black;
