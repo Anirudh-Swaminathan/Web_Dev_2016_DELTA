@@ -21,5 +21,7 @@
 ### Instructions to run game
     Download all the files in the folder above. Launch dinogoogle.html in your favourite browser.
 Press SPACE to start the game. Enjoy!! :smiley:
+<br/>
 P.S:- If you don't want to download the files, you can click [THIS](https://anirudh-swaminathan.github.io/Web_Dev_2016_DELTA/CTask2/) Link to enjoy the game.
+<br/>
 But you must have internet connection for this :stuck_out_tongue_winking_eye:
