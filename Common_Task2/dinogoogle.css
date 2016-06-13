@@ -1,6 +1,5 @@
 canvas{
 	position:relative;
-	top:6em;
 	left:26%;
 }
 #scores{
@@ -10,14 +9,14 @@ canvas{
 	text-align:center;
 	vertical-align:middle;
 	z-index:3;
-	top:12.5em;
+	top:6.5em;
 	left:55%;
 }
 #creator{
 	position:relative;
 	line-height:25px;
 	vertical-align:middle;
-	top:35em;
+	top:28em;
 }
 a{
 	text-decoration:none;
