@@ -10,7 +10,7 @@ var score = document.getElementById("scores");
 var tot=0;
 var hiscore = 0;
 var msg = "SCORE: ";
-var accel = 0,added = 0,fram = 125,fra1 = 75;
+var accel = 0,added = 0,fram = 145,fra1 = 80;
 
 //variables to add sound to the game
 var jumpSound;
@@ -24,6 +24,9 @@ var fra = 0;
 var started = false;
 var paused =false;
 
+//Picture sources
+var dijum,biup,bidn;
+
 
 function getHi(){
 	if(sessionStorage.getItem("hiScore")!==null){
@@ -35,7 +38,15 @@ function getHi(){
 function startGame(){
 	Anigame.start();
 	getHi();
+	
 	dinosaur = new component(100,75,"dino_jump.png",55,162,"image");
+	dijum = dinosaur.imag.src;
+	
+	var birdDo = new component(50,24,"birdDown.png",600,190,"image");
+	bidn = birdDo.imag.src;
+	var birdU = new component(50,24,"birdUp.png",600,190,"image");
+	biup = birdU.imag.src;
+	//alert(''+dijum);
 	bg = new component(600,270,"dino_bg.png",0,0,"background");
 	bg1 = new component(600,270,"dino_bg.png",600,0,"background");
 	
@@ -130,7 +141,7 @@ function component(width,height,color,x,y,type){
 	this.crashWith = function(cactii) {
         var dinol = this.x + 35;
         var dinor = this.x + (this.width)-23;
-		if(this.imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/dino_jump.png") {
+		if(this.imag.src === dijum) {
 			dinor = this.x+ this.width - 35;
 			//alert('Jumping dino');
 		}
@@ -141,7 +152,7 @@ function component(width,height,color,x,y,type){
         var cacttop = cactii.y;
         //var otherbottom = otherobj.y + (otherobj.height);
 		
-		if(cactii.imag.src === "file:///C:/Inductions/Delta_2016_Web/Common_Task2/birdUp.png"){
+		if(cactii.imag.src === biup){
 			cactr = cactii.x +cactii.width - 15;
 		}
 		
@@ -183,7 +194,9 @@ function updateArena(){
 			y = Anigame.canvas.height - 84;
 			if(Math.floor(tot/15)>100 && Math.floor(tot/15)%randBird <= 10) {
 				y = Anigame.canvas.height - 80;
-				cactii.push(new component(50,24,"birdUp.png",x,y,"image"));
+				var bird = new component(50,24,"birdUp.png",x,y,"image");
+				biup = bird.imag.src;
+				cactii.push(bird);
 				randBird = randBird + Math.floor(Math.random()*85);
 			}
 			else {
@@ -197,7 +210,7 @@ function updateArena(){
 		if(Math.floor(tot/15)!=0 && Math.floor(tot/15)%75 === 0){
 			if(added ==0){
 				accel+=0.1;
-				fram -=7;
+				fram -=15;
 				fra1-=5;
 				added = 1;
 			}
@@ -273,17 +286,16 @@ function updateArena(){
 		for(var i=0; i<cactii.length; ++i){
 			cactii[i].x+=-1-accel;
 			if(cactii[i].vir<30){
-				//alert(''+cactii[i].imag.src);
-				if(cactii[i].imag.src === "birdUp.png"||
-				cactii[i].imag.src === "birdDown.png"){
+				if(cactii[i].imag.src === biup||
+				cactii[i].imag.src === bidn){
 					cactii[i].changeSrc("birdDown.png");
 					cactii[i].vir++;
 				//alert('Changed source to dino.vir is '+cactii[i].vir);
 				}
 			}
 			else if(cactii[i].vir<60){
-				if(cactii[i].imag.src === "birdDown.png"||
-				"birdUp.png"){
+				if(cactii[i].imag.src === bidn||
+				cactii[i].imag.src === biup){
 					cactii[i].changeSrc("birdUp.png");
 					cactii[i].vir++;
 				//alert('Changed source to Screenshot.vir is '+cactii[i].vir);
