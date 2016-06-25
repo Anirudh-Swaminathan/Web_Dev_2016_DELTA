@@ -1,8 +1,9 @@
 <?php
+session_start();
 require "connect.php";
 
 if(!(isset($_POST["Name"]) && isset($_POST["Phone"]) && isset($_POST["email"])  && isset($_POST["pass"]) && isset($_POST["conf"]))){
-	echo "Please fill the form first";
+	die("Please fill the form first");
 }
 //echo "Hello. AJAX was successful";
 
@@ -11,6 +12,12 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 $message = "Hello";
+
+	if(isset($_SESSION['login_status']) && $_SESSION['login_status'] == true){
+		//echo "You have already logged in another tab";
+		//header("Location: /Spider_2016_4/bulletin.php");
+		die("Already logged in");
+	}
 
 function validateInp($n,$p,$e,$f,$pa,$c){
 	global $message;
@@ -87,13 +94,53 @@ $filename = basename($_FILES["imageUpload"]["tmp_name"]);
 $pass = $_POST["pass"];
 $conf = $_POST["conf"];
 
-echo "The posted details are '$name' <br/> '$phone' <br/> '$email' <br/> '$filename' <br/> '$pass' <br/> '$conf' ";
+
+//echo "The posted details are '$name' <br/> '$phone' <br/> '$email' <br/> '$filename' <br/> '$pass' <br/> '$conf' ";
 
 if(validateInp($name,$phone,$email,$filename,$pass,$conf)){
-	echo "All details were valid";
+	//echo "All details were valid";
+	
+	$filename = basename($_FILES['imageUpload']['name']);
+	
+	$store = password_hash($pass,PASSWORD_BCRYPT);
+	
+	$sql = $conn->prepare("INSERT INTO `delta_2016_3` (`Username`, `Phone`, `Email`, `Picture`, `Password`) VALUES (?, ?, ?, ?, ?)");
+	$sql->bind_param("sssss",$name,$phone,$email,$filename,$store);
+	$bo = $sql->execute();
+	if($bo){
+		//echo "Insert was successful";
+		
+		mkdir($name.'/images',0777,true);
+		chmod($name,0777);
+		chmod($name.'/images',0777);
+		$target_dir = $name . '/' . 'images/';
+		$target_file = $target_dir . basename($_FILES["imageUpload"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		if(move_uploaded_file($_FILES["imageUpload"]["tmp_name"],$target_file)){
+			//echo "The file ". basename($_FILES["imageUpload"]["name"]). " has been uploaded.";
+			echo "Success";
+		} else {
+			echo "Sorry, there was an error uploading your file.";
+		}
+		
+		$myFile = "./".$name."/index.php";
+		$fh = fopen($myFile, 'w') or die("error");
+		$stringData = "<?php
+		echo '<h3>$name</h3><br/>';
+		echo '<img src = \'images/$filename \' width=\'300px\' height=\'300px\' alt= \'Sorry No Image was found \' />';
+		echo '<br/><h4>Phone: $phone</h4><br/>';
+		echo '<p>Email: $email</p><br/>';
+		?>";	
+		
+		fwrite($fh,$stringData);
+	}
+	else{
+		echo "Could not insert into the table.Someone might have registered with the same username, phone or email";
+	}
 }
 else{
-	echo "Invalid details due to <br/> '$message'";
+	echo "Invalid details. '$message'";
 }
 
 ?>

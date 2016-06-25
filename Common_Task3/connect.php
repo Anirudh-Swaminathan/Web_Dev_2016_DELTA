@@ -1,5 +1,5 @@
 <?php
-$db_name = "spider_2016";
+$db_name = "delta_2016";
 $mysql_username = "root";
 $mysql_password = "Cjul1968ScB";
 $server_name = "localhost";

@@ -1,7 +1,7 @@
 <?php
    session_start();
    $logged_in_status = false;
-   $redirect_page1 = '/../Spider_2016_4/index.php';
+   $redirect_page1 = '/../Delta_2016_3/index.php';
    function redirect($redirect_page){
    		
 		header('Location: '.$redirect_page);

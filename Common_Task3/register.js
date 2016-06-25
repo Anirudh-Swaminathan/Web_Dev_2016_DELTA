@@ -19,8 +19,7 @@ function validate(){
 	}
 	if (!(/\S/.test(n))) {
 		alert('The name must not be only whiteSpace');
-		return false;
-		
+		return false;	
 	}
 
 	//Check phone
@@ -42,16 +41,6 @@ function validate(){
 		alert("Invalid mail address");
 		return false;
 	}
-	/*
-	var atpos = e.lastIndexOf("@");
-    var dotpos = e.lastIndexOf(".");
-    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-        alert("Not a valid e-mail address");
-        return false;
-    }
-	*/
-	//alert("Pass is "+pass+" Length of pass is "+pass.length);
-	//alert("Conf is "+c+" length of conf is "+c.length);
 	
 	//Check pass
 	if(!(/\S/.test(pass))){
@@ -75,39 +64,33 @@ function validate(){
 	return true;	
 }
 document.getElementById('regis').addEventListener("submit",function(e){
-	//alert('Clicked Button');
+	
 	e.preventDefault();
 	var f = e.target;
-	alert(f);
+	//alert(f);
 	var data = new FormData(f);
-	alert(data);
-	alert("Method is "+f.method);
-	alert("Action is "+f.action);
+	//alert(data);
+	//alert("Method is "+f.method);
+	//alert("Action is "+f.action);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function(){
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			alert(xhttp.responseText);
+			//alert(xhttp.responseText);
+			if(xhttp.responseText === "Success"){
+				document.getElementById('regis').reset();
+				
+				alert('Successfully registered. Taking you to the login page now');
+				window.location.href = '/../Delta_2016_3/';
+            }
+            else{
+				if(xhttp.responseText === "Already logged in"){
+					alert('Please Logout before registering a new user');
+					location.reload();
+				}
+                else alert(xhttp.responseText);
+            }
 		}
 	};
 	xhttp.open(f.method,f.action,true);
 	xhttp.send(data);
 })
-/*
-document.getElementById('regis').addEventListener("submit", function(e) {
-	if(validate()){
-    e.preventDefault()
-    var form = e.target
-    var data = new FormData(form)
-
-    var request = new XMLHttpRequest()
-
-    request.onreadystatechange = function() {
-      //document.getElementById("result").innerText = request.responseText
-	  alert(request.responseText)
-    }
-
-    request.open(form.method, form.action)
-    request.send(data)
-	}
-  })
-  */

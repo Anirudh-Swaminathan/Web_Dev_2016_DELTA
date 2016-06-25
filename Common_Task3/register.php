@@ -1,6 +1,6 @@
 <?php
 session_start();
-$redirect_page = '/../Spider_2016_4/bulletin.php';
+$redirect_page = '/../Delta_2016_3/user.php';
 if(isset($_SESSION['login_status']) && $_SESSION['login_status']){
 	header('Location: '.$redirect_page);
 }
@@ -17,11 +17,11 @@ if(isset($_SESSION['login_status']) && $_SESSION['login_status']){
 		<header>Member Login</header>
 	
 		<label>Name</label>
-		<input required name="Name" pattern="[a-zA-Z][a-zA-Z ]+|[a-zA-Z]" title="Enter only alphabets and spaces" id="Name"/>
+		<input required name="Name" pattern="[a-zA-Z][a-zA-Z ]+|[a-zA-Z]" title="Enter only alphabets and spaces" placeholder = "Enter Name" id="Name"/>
 		<br/>
 		
 		<label>Phone</label>
-		<input required name="Phone" maxlength = "10" pattern="^[0-9]{10}$" title="Enter a valid 10 digit phone number" id="Phone"/>
+		<input required name="Phone" maxlength = "10" pattern="^[0-9]{10}$" title="Enter a valid 10 digit phone number" placeholder="Enter Mobile Number" id="Phone"/>
 		<br/>
 	
 		<label>Email</label>
@@ -34,11 +34,11 @@ if(isset($_SESSION['login_status']) && $_SESSION['login_status']){
 		<br/>
 	
 		<label>Password</label>
-		<input required name="pass" type="password" id="pass" id="pass"/>
+		<input required name="pass" type="password" placeholder="Password" id="pass" id="pass"/>
 		<br/>
 		
 		<label>Confirm Password</label>
-		<input required name="conf" type="password" id="conf" id="conf"/>
+		<input required name="conf" type="password" placeholder="Password" id="conf" id="conf"/>
 		<br/>
 
 		<button id="logBtn" onclick="return btnClick()" >Register</button> <!-- onclick="return btnClick()" -->
