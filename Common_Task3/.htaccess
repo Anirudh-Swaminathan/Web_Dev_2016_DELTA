@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http://localhost/Delta_2016_3/search.html$
+RewriteRule gethint.php - [F,NC]
+RewriteCond %{SCRIPT_FILENAME} -d [OR]
+RewriteCond %{SCRIPT_FILENAME} -f
+RewriteRule "(^|/)\." - [F]
+RedirectMatch 404 /\..*$

@@ -42,7 +42,12 @@ if(isset($_SESSION['login_status']) && $_SESSION['login_status']){
 		<br/>
 
 		<button id="logBtn" onclick="return btnClick()" >Register</button> <!-- onclick="return btnClick()" -->
-		<center><div id="register">Login <a href="index.php">HERE</a></div></center>
+		<center>
+		<div class="register">
+		Login <a href="index.php">HERE</a>. Click <a href="search.html">HERE</a> to search all users of this website
+		</div>
+		</center>
+		
 	</form>
 </div>
 <script src="register.js" type='text/javascript'>

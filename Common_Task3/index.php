@@ -20,7 +20,8 @@ if(isset($_SESSION['login_status']) && $_SESSION['login_status']){
 		<label>Password</label>
 		<input type="password" required name = "password" id="password" placeholder = "Enter Password" />
 		<button id="logBtn" onclick="return btnClick()">Login</button>
-		<center><div id="register">New User? Register <a href="register.php">HERE</a></div></center>
+		<center><div class="register">New User? Register <a href="register.php">HERE</a></div></center>
+		<center><div class="register">Click <a href="search.html">HERE</a> to search all users of this website</div></center>
 	</form>
 </div>
 <script src="login.js" type='text/javascript'>

@@ -18,9 +18,9 @@ function showHint(str) {
 					users.innerHTML = "";
 					a.split(/\s*,\s*/).forEach(function(user) {
 						//alert(""+user);
-						users.innerHTML += "<div class = 'user'>" +
-						"<h4><a href='/../Delta_2016_3/" +user+ "' target='__blank'>" +user+ "</a></h4>" +
-						"</div>";
+						users.innerHTML += "<a href='/../Delta_2016_3/" +user+ "' target='__blank'><div class = 'user'>" +
+						"<h4>" +user+ "</h4>" +
+						"</div></a>";
 					});
 				}
             }

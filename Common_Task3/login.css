@@ -59,13 +59,13 @@ form label {
 	margin-top:120px;
 	margin-left: 500px;
 }
-#register{
+.register{
 	color:#01ba0b;
 }
-#register a{
+.register a{
 	text-decoration:none;
 	color:#1e33f0;
 }
-#register a:hover{
+.register a:hover{
 	color:#FF3838;
 }

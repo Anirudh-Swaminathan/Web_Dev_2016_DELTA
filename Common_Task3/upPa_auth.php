@@ -66,6 +66,24 @@ if(validateInp($filename)){
 			echo "Sorry, there was an error uploading your file.";
 		}
 		$_SESSION["pic"] = $filename;
+		
+		$name = $_SESSION['username'];
+		$phone = $_SESSION['phone'];
+		$email = $_SESSION['email'];
+			
+		unlink("./".$name."/index.php");
+		
+		$myFile = "./".$name."/index.php";
+		$fh = fopen($myFile, 'w') or die("error");
+		$stringData = "<?php
+		echo '<h3>$name</h3><br/>';
+		echo '<img src = \'images/$filename \' width=\'300px\' height=\'300px\' alt= \'Sorry No Image was found \' />';
+		echo '<br/><h4>Phone: $phone</h4><br/>';
+		echo '<p>Email: $email</p><br/>';
+		?>";	
+		
+		fwrite($fh,$stringData);
+		
 	}
 	else{
 		echo "Could not insert into the table.";
