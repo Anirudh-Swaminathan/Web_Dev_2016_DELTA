@@ -22,6 +22,7 @@ else{
 </head>
 <body>
 	<ul id="drop-nav">
+		<li><a href="search.html">View All Users</a></li>
 		<li><a href="#">Update details</a>
 		<ul>
 			<li><a href="update.php">Update Password<br/>(Pic Optional)</a></li>

@@ -1,0 +1,32 @@
+#users{
+    width: 250px;
+    position: relative;
+    left:1%;
+    top:10%;
+}
+.user{
+    width: 250px;
+    display: block;
+    background-color: #4e60b6;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-color: chartreuse;
+}
+.user h4{
+    display: block;
+    margin: 4px;
+    padding: 4px;
+}
+.user h4 a{
+	text-decoration:none;
+	color:white;
+}
+.user h4 a:hover{
+	text-decoration:none;
+	color:black;
+}
+body{
+    background-color: #7df0c6;
+}
