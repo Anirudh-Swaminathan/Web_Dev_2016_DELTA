@@ -11,8 +11,8 @@
 * [X] User must be able to update his details.
 
 ### Features implemented
-- Registration of a new user using AJAX for requests. Username, phone and email are unique for each user
-- Secure login for users. BLocked all access of other pages.
+- Registration of a new user using AJAX for requests. Username, phone and email are unique for each user.
+- Secure login for users. Blocked all access of other pages.
 - Prevented SQL Injection.
 - Update details such as password and profile picture.
 - Search for other users, with hints popping up using AJAX. Clicking on hint shows their profile.
