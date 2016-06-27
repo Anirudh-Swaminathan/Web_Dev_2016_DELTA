@@ -10,6 +10,9 @@
 * [X] Use AJAX for form submission.
 * [X] User must be able to update his details.
 
+    The language used was PHP. The database system was MySQL. The server used was WAMP.
+    No Frameworks were used.
+
 ### Features implemented
 - Registration of a new user using AJAX for requests. Username, phone and email are unique for each user.
 - Secure login for users. Blocked all access of other pages.
@@ -18,6 +21,9 @@
 - Search for other users, with hints popping up using AJAX. Clicking on hint shows their profile.
 - Each registered user has a separate profile page that can be viewed by all registered users.
 - Configured Apache Engine using .htaccess to block access to few PHP Pages.
+- Profile picture is a part of the registration form.
+- Validated data in Client side, as well as server side.
+- Passwords are hashed before storing into the db.
 
 ### List of Server Routes
     The list of server routes is as follows:-
