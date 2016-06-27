@@ -67,16 +67,15 @@ document.getElementById('regis').addEventListener("submit",function(e){
 	
 	e.preventDefault();
 	var f = e.target;
-	//alert(f);
+
 	var data = new FormData(f);
-	//alert(data);
-	//alert("Method is "+f.method);
-	//alert("Action is "+f.action);
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function(){
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			//alert(xhttp.responseText);
+
 			if(xhttp.responseText === "Success"){
+				//Success in register
 				document.getElementById('regis').reset();
 				
 				alert('Successfully registered. Taking you to the login page now');
@@ -84,6 +83,7 @@ document.getElementById('regis').addEventListener("submit",function(e){
             }
             else{
 				if(xhttp.responseText === "Already logged in"){
+					//Already logged in
 					alert('Please Logout before registering a new user');
 					location.reload();
 				}

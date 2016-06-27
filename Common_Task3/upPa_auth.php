@@ -2,7 +2,6 @@
 session_start();
 require "connect.php";
 
-//echo "Hello. AJAX was successful";
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -41,17 +40,16 @@ function validateInp($f){
 $filename = basename($_FILES["imageUpload"]["tmp_name"]);
 
 
-//echo "The posted details are '$name' <br/> '$phone' <br/> '$email' <br/> '$filename' <br/> '$pass' <br/> '$conf' ";
 
 if(validateInp($filename)){
-	//echo "All details were valid";
+	//All details were valid
 	$filename = basename($_FILES['imageUpload']['name']);
 		
 	$sql = $conn->prepare("UPDATE `delta_2016_3` SET `Picture` = ? WHERE `delta_2016_3`.`Username` = ?");
 	$sql->bind_param("ss",$filename,$_SESSION['username']);
 	$bo = $sql->execute();
 	if($bo){
-		//echo "Insert was successful";
+		//Insert was successful
 		
 		unlink("".$_SESSION["username"]."/images/".$_SESSION["pic"]);	
 		
@@ -60,7 +58,6 @@ if(validateInp($filename)){
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 		if(move_uploaded_file($_FILES["imageUpload"]["tmp_name"],$target_file)){
-			//echo "The file ". basename($_FILES["imageUpload"]["name"]). " has been uploaded.";
 			echo "Success";
 		} else {
 			echo "Sorry, there was an error uploading your file.";

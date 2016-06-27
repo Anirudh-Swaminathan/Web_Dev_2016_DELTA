@@ -8,7 +8,7 @@ function showHint(str) {
 		formdata.append("q",str);
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                //document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+
 				var a = xmlhttp.responseText;
 				if(a==="no suggestion"){
 					document.getElementById("users").innerHTML = a;
@@ -17,7 +17,7 @@ function showHint(str) {
 					var users = document.getElementById("users");
 					users.innerHTML = "";
 					a.split(/\s*,\s*/).forEach(function(user) {
-						//alert(""+user);
+
 						users.innerHTML += "<a href='/../Delta_2016_3/" +user+ "' target='__blank'><div class = 'user'>" +
 						"<h4>" +user+ "</h4>" +
 						"</div></a>";

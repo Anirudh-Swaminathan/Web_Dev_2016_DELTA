@@ -16,8 +16,10 @@ session_start();
 		die("Already logged in");
 	}
 
+	//Function to validate input
 	function validateInp($n,$p){
 		global $message;
+		//Test name
 		if(!(preg_match('/[a-zA-Z][a-zA-Z ]+|[a-zA-Z]/',$n))){
 			$message = 'Username must not be empty';
 			return false;
@@ -52,34 +54,27 @@ session_start();
 		$sql->store_result();
 		
 		if($sql->num_rows == 0){
-			//echo "It seems you haven't registered yet";
+			//User hasn't registered yet
 			$message = "It seems you have not registered yet";
 			session_unset();
 			session_destroy();
 			echo "$message";
-			//echo "<script type='text/javascript'>alert('$message');window.location.href='/Spider_2016_4/register.php';</script>";
-			//header('Location: /../Spider_2016_4/register.php');
 		} else {
 			while($sql->fetch()){
 				//do nothing
 			}
-			//echo "Entered password is ".$user_pass;
-			//echo "Password in DB is ".$passInTab;
 			if(password_verify($user_pass,$pass)){
 				echo "Success";
 				$_SESSION['login_status'] = true;
 				$_SESSION['phone'] = $phone;
 				$_SESSION['email'] = $emai;
 				$_SESSION['pic'] = $pic;
-				//header('Location: /../Spider_2016_4/bulletin.php');
 			} else {
-				//echo "Incorrect password for the given username";
+				//Incorrect password for the given username
 				$message = "Incorrect password for the given username";
 				session_unset();
 				session_destroy();
 				echo "$message";
-				//echo "<script type='text/javascript'>alert('$message');window.location.href='/Spider_2016_4/';</script>";
-				//header('Location: /../Spider_2016_4/');
 			}
 		}
 		$sql->close();
@@ -89,6 +84,5 @@ session_start();
 		session_unset();
 		session_destroy();
 		echo "$message";
-		//echo "<script type='text/javascript'>alert('$message');window.location.href='/Spider_2016_4/';</script>";
 	}
 ?>

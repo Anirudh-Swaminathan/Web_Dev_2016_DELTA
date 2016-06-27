@@ -14,15 +14,10 @@ document.getElementById('logi').addEventListener("submit",function(e){
 	
 	e.preventDefault();
 	var f = e.target;
-	//alert(f);
 	var data = new FormData(f);
-	//alert(data);
-	//alert("Method is "+f.method);
-	//alert("Action is "+f.action);
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function(){
 		if (xhttp.readyState == 4 && xhttp.status == 200) {
-			//alert(xhttp.responseText);
 			if(xhttp.responseText === "Success"){
 				document.getElementById('logi').reset();
 				

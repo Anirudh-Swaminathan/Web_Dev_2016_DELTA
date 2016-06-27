@@ -5,7 +5,7 @@ require "connect.php";
 if(!(isset($_POST["Name"]) && isset($_POST["Phone"]) && isset($_POST["email"])  && isset($_POST["pass"]) && isset($_POST["conf"]))){
 	die("Please fill the form first");
 }
-//echo "Hello. AJAX was successful";
+
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -14,13 +14,14 @@ header("Pragma: no-cache");
 $message = "Hello";
 
 	if(isset($_SESSION['login_status']) && $_SESSION['login_status'] == true){
-		//echo "You have already logged in another tab";
-		//header("Location: /Spider_2016_4/bulletin.php");
+		//User already logged in another tab
 		die("Already logged in");
 	}
 
+//Function to validate the input
 function validateInp($n,$p,$e,$f,$pa,$c){
 	global $message;
+	//Test name
 	if(!(preg_match('/[a-zA-Z][a-zA-Z ]+|[a-zA-Z]/',$n))){
 		$message = 'Username must not be empty';
 		return false;
@@ -29,6 +30,7 @@ function validateInp($n,$p,$e,$f,$pa,$c){
 		$message = 'Username must contain atleast 1 non-whitespace character';
 		return false;
 	}
+	//Test phone number
 	if(!strcmp($p,'')){
 		$message = 'Phone number must not be empty';
 		return false;
@@ -95,10 +97,8 @@ $pass = $_POST["pass"];
 $conf = $_POST["conf"];
 
 
-//echo "The posted details are '$name' <br/> '$phone' <br/> '$email' <br/> '$filename' <br/> '$pass' <br/> '$conf' ";
-
 if(validateInp($name,$phone,$email,$filename,$pass,$conf)){
-	//echo "All details were valid";
+	//All details were valid
 	
 	$filename = basename($_FILES['imageUpload']['name']);
 	
@@ -108,7 +108,7 @@ if(validateInp($name,$phone,$email,$filename,$pass,$conf)){
 	$sql->bind_param("sssss",$name,$phone,$email,$filename,$store);
 	$bo = $sql->execute();
 	if($bo){
-		//echo "Insert was successful";
+		//Insert was successful
 		
 		mkdir($name.'/images',0777,true);
 		chmod($name,0777);

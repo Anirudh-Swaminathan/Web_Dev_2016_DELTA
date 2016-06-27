@@ -5,7 +5,6 @@ require "connect.php";
 if(!(isset($_POST["pass"]) && isset($_POST["conf"]))){
 	die("Please fill the form first");
 }
-//echo "Hello. AJAX was successful";
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
@@ -15,8 +14,7 @@ $message = "Hello";
 $uploaded = false;
 
 if(!(isset($_SESSION['login_status']) && $_SESSION['login_status'] == true)){
-		//echo "You have already logged in another tab";
-		//header("Location: /Spider_2016_4/bulletin.php");
+	//Not logged in
 	die("Not logged in");
 }
 
@@ -70,10 +68,9 @@ $pass = $_POST["pass"];
 $conf = $_POST["conf"];
 
 
-//echo "The posted details are '$name' <br/> '$phone' <br/> '$email' <br/> '$filename' <br/> '$pass' <br/> '$conf' ";
 
 if(validateInp($filename,$pass,$conf)){
-	//echo "All details were valid";
+	//All details were valid
 	$store = password_hash($pass,PASSWORD_BCRYPT);
 	if($uploaded){
 		
@@ -83,7 +80,7 @@ if(validateInp($filename,$pass,$conf)){
 		$sql->bind_param("sss",$filename,$store,$_SESSION['username']);
 		$bo = $sql->execute();
 		if($bo){
-		//echo "Insert was successful";
+		//Insert was successful
 		
 			unlink("".$_SESSION["username"]."/images/".$_SESSION["pic"]);	
 		
@@ -92,7 +89,6 @@ if(validateInp($filename,$pass,$conf)){
 			$uploadOk = 1;
 			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 			if(move_uploaded_file($_FILES["imageUpload"]["tmp_name"],$target_file)){
-			//echo "The file ". basename($_FILES["imageUpload"]["name"]). " has been uploaded.";
 				echo "Success";
 			} else {
 				echo "Sorry, there was an error uploading your file.";

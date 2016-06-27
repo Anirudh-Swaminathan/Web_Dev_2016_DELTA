@@ -8,7 +8,7 @@ while($sql->fetch()){
 	$a[] = $user;
 }
 
-// get the q parameter from URL
+// get the q parameter from POST Request
 $q = $_POST["q"];
 
 $hint = "";
